@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TechsIndexRouteImport } from './routes/techs.index'
+import { Route as TechsTechIdRouteImport } from './routes/techs.$techId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TechsIndexRoute = TechsIndexRouteImport.update({
+  id: '/techs/',
+  path: '/techs/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TechsTechIdRoute = TechsTechIdRouteImport.update({
+  id: '/techs/$techId',
+  path: '/techs/$techId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/techs/$techId': typeof TechsTechIdRoute
+  '/techs/': typeof TechsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/techs/$techId': typeof TechsTechIdRoute
+  '/techs': typeof TechsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/techs/$techId': typeof TechsTechIdRoute
+  '/techs/': typeof TechsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/techs/$techId' | '/techs/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/techs/$techId' | '/techs'
+  id: '__root__' | '/' | '/techs/$techId' | '/techs/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  TechsTechIdRoute: typeof TechsTechIdRoute
+  TechsIndexRoute: typeof TechsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/techs/': {
+      id: '/techs/'
+      path: '/techs'
+      fullPath: '/techs/'
+      preLoaderRoute: typeof TechsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/techs/$techId': {
+      id: '/techs/$techId'
+      path: '/techs/$techId'
+      fullPath: '/techs/$techId'
+      preLoaderRoute: typeof TechsTechIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  TechsTechIdRoute: TechsTechIdRoute,
+  TechsIndexRoute: TechsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
