@@ -10,12 +10,24 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DisputesRouteImport } from './routes/disputes'
+import { Route as InvoicesRouteImport } from './routes/invoices'
 import { Route as TechsIndexRouteImport } from './routes/techs.index'
 import { Route as TechsTechIdRouteImport } from './routes/techs.$techId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DisputesRoute = DisputesRouteImport.update({
+  id: '/disputes',
+  path: '/disputes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InvoicesRoute = InvoicesRouteImport.update({
+  id: '/invoices',
+  path: '/invoices',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TechsIndexRoute = TechsIndexRouteImport.update({
@@ -31,30 +43,39 @@ const TechsTechIdRoute = TechsTechIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/disputes': typeof DisputesRoute
+  '/invoices': typeof InvoicesRoute
   '/techs/$techId': typeof TechsTechIdRoute
   '/techs/': typeof TechsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/disputes': typeof DisputesRoute
+  '/invoices': typeof InvoicesRoute
   '/techs/$techId': typeof TechsTechIdRoute
   '/techs': typeof TechsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/disputes': typeof DisputesRoute
+  '/invoices': typeof InvoicesRoute
   '/techs/$techId': typeof TechsTechIdRoute
   '/techs/': typeof TechsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/techs/$techId' | '/techs/'
+  fullPaths: '/' | '/disputes' | '/invoices' | '/techs/$techId' | '/techs/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/techs/$techId' | '/techs'
-  id: '__root__' | '/' | '/techs/$techId' | '/techs/'
+  to: '/' | '/disputes' | '/invoices' | '/techs/$techId' | '/techs'
+  id:
+    '__root__' | '/' | '/disputes' | '/invoices' | '/techs/$techId' | '/techs/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DisputesRoute: typeof DisputesRoute
+  InvoicesRoute: typeof InvoicesRoute
   TechsTechIdRoute: typeof TechsTechIdRoute
   TechsIndexRoute: typeof TechsIndexRoute
 }
@@ -66,6 +87,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/disputes': {
+      id: '/disputes'
+      path: '/disputes'
+      fullPath: '/disputes'
+      preLoaderRoute: typeof DisputesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/invoices': {
+      id: '/invoices'
+      path: '/invoices'
+      fullPath: '/invoices'
+      preLoaderRoute: typeof InvoicesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/techs/': {
@@ -87,6 +122,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DisputesRoute: DisputesRoute,
+  InvoicesRoute: InvoicesRoute,
   TechsTechIdRoute: TechsTechIdRoute,
   TechsIndexRoute: TechsIndexRoute,
 }
