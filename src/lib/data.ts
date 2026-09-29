@@ -59,7 +59,7 @@ export const techs: Tech[] = [
   {
     id: "nomsa-dlamini",
     name: "Nomsa Dlamini",
-    split: 30,
+    split: 40,
     verified: 9500,
     invoiceStatus: "Overdue",
     invoiceNumber: "INV-2026-09-03",

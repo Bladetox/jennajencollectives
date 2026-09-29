@@ -1,14 +1,14 @@
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 export function currency(value: number): string {
-  return `R${value.toLocaleString("en-ZA", {
+  return `R${value.toLocaleString("en-US", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   })}`;
 }
 
 export function currencyShort(value: number): string {
-  return `R${value.toLocaleString("en-ZA", { maximumFractionDigits: 0 })}`;
+  return `R${value.toLocaleString("en-US", { maximumFractionDigits: 0 })}`;
 }
 
 export function formatDate(iso: string): string {

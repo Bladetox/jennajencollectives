@@ -814,3 +814,17 @@ body {
   .hero { padding-bottom: var(--s-5); }
   .card-figure { font-size: 26px; }
 }
+
+/* Hide all visual scrollbars on every screen size. Scrolling still works. */
+html, body, * {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+  background: transparent;
+}
