@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1400" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="18%" r="75%">
+      <stop offset="0%" stop-color="#e8a850" stop-opacity="0.42"/>
+      <stop offset="45%" stop-color="#7a4bd0" stop-opacity="0.24"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="nebula" cx="30%" cy="75%" r="75%">
+      <stop offset="0%" stop-color="#3554d1" stop-opacity="0.28"/>
+      <stop offset="60%" stop-color="#1a1030" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="stars" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="2" seed="11"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 0.96  0 0 0 0 0.88  0 0 0 64 -60"/>
+    </filter>
+  </defs>
+  <rect width="900" height="1400" fill="#060709"/>
+  <rect width="900" height="1400" fill="url(#nebula)"/>
+  <rect width="900" height="1400" filter="url(#stars)"/>
+  <rect width="900" height="1400" fill="url(#glow)"/>
+</svg>
